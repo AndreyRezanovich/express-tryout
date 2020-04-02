@@ -16,4 +16,3 @@ const todos = [
 
 module.exports = todos;
 
-// route.get.by.id;
