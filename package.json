@@ -6,17 +6,19 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@types/mongoose": "^5.7.8",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "^4.17.1",
     "express-serve-static-core": "latest",
     "http-errors": "~1.6.3",
+    "mongodb": "^3.5.5",
     "mongoose": "^5.9.7",
+    "mongoose-decorators": "^0.2.0",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
-    "server": "^1.0.27",
-    "mongodb": "latest"
+    "server": "^1.0.27"
   },
   "devDependencies": {
     "cors": "^2.8.5"

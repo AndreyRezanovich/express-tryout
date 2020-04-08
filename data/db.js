@@ -1,18 +1,5 @@
-const todos = [
-  {
-    id: '0',
-    text: 'First todo'
-  },
-  {
-    id: '1',
-    text: 'Second todo'
-  },
-  {
-    id: '2',
-    text: 'Third todo'
-  }
-];
+module.exports = {
+    url : 'mongodb://localhost:27017/todosdb'
+};
 
-
-module.exports = todos;
 
