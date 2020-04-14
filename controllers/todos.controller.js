@@ -6,13 +6,13 @@ const mongoose = require('mongoose');
 module.exports = Todo;
 module.exports = router;
 
-
 const notFound = (_id) => {
     return {
         status: 'error',
         error: `Document with id of ${_id} was not found`
     };
 };
+
 const paramRequired = (param) => {
     return {
         status: 'error',
@@ -21,14 +21,30 @@ const paramRequired = (param) => {
 };
 
 router.get('/', (req, res) => {
-    Todo.find((err, result) => {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            res.status(200).send(result)
-        }
-    })
+    validateQueryBySchema(req.query, Todo.schema.paths);
+    if (Object.keys(req.query)) {
+        Todo.find(req.query, (err, result) => {
+            res.status(200).send(result);
+        });
+    } else {
+        Todo.find((err, result) => {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                res.status(200).send(result);
+            }
+        })
+    }
 });
+
+const validateQueryBySchema = (queryParams, schema) => {
+    const queryParamsArray = Object.keys(queryParams);
+    queryParamsArray.forEach(param => {
+        if (!schema[param]) {
+            delete queryParams[param];
+        }
+    });
+};
 
 router.get('/:id', (req, res) => {
     Todo.findById(req.params.id, (err, result) => {
@@ -58,8 +74,6 @@ router.delete('/:id', (req, res) => {
     let deletedTodoId = req.params.id;
     if (deletedTodoId) {
         Todo.findOneAndDelete({_id: deletedTodoId}, (err, result) => {
-            console.log('error', err);
-            console.log('result', result);
             if (err) {
                 res.status(404).send(notFound(deletedTodoId));
             } else {

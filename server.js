@@ -14,7 +14,8 @@ app.listen(4201, (req, res) => {
     mongoose.connect(db.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useCreateIndex: true
     }, (err) => {
         if (err) console.log('Not connected to DB');
         else console.log('Connected to DB');
